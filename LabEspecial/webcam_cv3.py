@@ -10,10 +10,12 @@ import telegram
 
 bot = telegram.Bot(token='863169587:AAGqpDZjM4XhdI862MMi94PbbftqBMjGpiQ')
 chat_id = '77798588'
+#chat_id = '168463523'
 def telegram_bot_sendtext(bot_message):
     
     bot_token = '863169587:AAGqpDZjM4XhdI862MMi94PbbftqBMjGpiQ'
     bot_chatID = '77798588'
+    #bot_chatID = '168463523'
     send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + '&parse_mode=Markdown&text=' + bot_message
 
     response = requests.get(send_text)
@@ -54,6 +56,11 @@ while True:
         # Rectangle
         cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
+        x=1
+    if anterior != len(faces):
+        anterior = len(faces)
+        log.info("faces: "+str(len(faces))+" at "+str(dt.datetime.now()))
+
         # Send message to telgram user
         test = telegram_bot_sendtext(str(len(faces))+" FACE(S) DETECTED! at "+str(dt.datetime.now()))
 
@@ -63,11 +70,6 @@ while True:
         
 
         bot.send_photo(chat_id=chat_id, photo=open('face.jpg', 'rb'))
-        x=1
-    if anterior != len(faces):
-        anterior = len(faces)
-        log.info("faces: "+str(len(faces))+" at "+str(dt.datetime.now()))
-
 
     # Display the resulting frame
     cv2.imshow('Deteccion de Caras', frame)

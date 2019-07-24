@@ -1,16 +1,17 @@
 import serial
-
-def CONCHA(x):
-        for i in range(0, len(x)):
-                print(i, ord(x[i]))
-                print(i, x[i])
+import time
 
 port = serial.Serial("/dev/ttyACM0", baudrate=9600, timeout=0.2)
 
+
+time.sleep(5)
+port.write('h')
+
 while True:
-        rcv= port.readline()
-        CONCHA(rcv)
-        print "Tag detected: " + rcv
+	rcv= port.readline()
+	print( "Tag detected: " , rcv)
+	
+
 
 
 

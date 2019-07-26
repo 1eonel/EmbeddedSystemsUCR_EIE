@@ -8,6 +8,7 @@ from time import sleep
 import requests
 import telegram
 
+############# Telegram bot usage declaration ########################
 bot = telegram.Bot(token='863169587:AAGqpDZjM4XhdI862MMi94PbbftqBMjGpiQ')
 chat_id = '77798588'
 #chat_id = '168463523'
@@ -21,8 +22,8 @@ def telegram_bot_sendtext(bot_message):
     response = requests.get(send_text)
 
     return response.json()
-
-
+#####################################################################
+################## webcam declarations ############################
 # Creating face cascade. (Check image example)
 cascPath = "haarcascade_frontalface_default.xml"
 faceCascade = cv2.CascadeClassifier(cascPath)
@@ -33,6 +34,7 @@ video_capture = cv2.VideoCapture(0)
 anterior = 0
 x=0
 while True:
+    # Video source failure case
     if not video_capture.isOpened():
         print('Unable to load camera.')
         sleep(5)
@@ -41,6 +43,7 @@ while True:
     # Capture video frame-by-frame
     ret, frame = video_capture.read()
 
+    # Gray scale
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     faces = faceCascade.detectMultiScale(
